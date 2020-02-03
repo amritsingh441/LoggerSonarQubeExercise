@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTimeExercise.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Logger with SonarQube Exercise for Java 8</a> &gt; <a href="index.source.html" class="el_package">com.learn.e05.datetime</a> &gt; <span class="el_source">DateTimeExercise.java</span></div><h1>DateTimeExercise.java</h1><pre class="source lang-java linenums">package com.learn.e05.datetime;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+
+<span class="fc" id="L13">public class DateTimeExercise {</span>
+	
+
+	/*
+	 * Create a class Tablet with attributes,tablet name, manufacturer, manufacture
+	 * date and expiry date(LocalDate).
+	 *  - Create a class DateTimeExercise with the
+	 * following methods and variables 
+	 * - create a variable tablets of type
+	 * ArrayList&lt;Tablet&gt; and initialize with some tablet objects
+	 * 
+	 * - getExpiringTables(int months):List&lt;String&gt; - method should take number of
+	 * months as parameter and return a List of tablet names expiring within the
+	 * given months from today.
+	 * 
+	 * - getExpiringTabletsSorted - return a List of Tablets, in the ascending order
+	 * of expiry date
+	 * 
+	 * - getTabletExpiryPeriod - return a Map with the tablet name as key and the
+	 * period between the manufacture date and expiry date as value. The period
+	 * should be a string containing years, months and days (ex: 1 year/s 2 month/s
+	 * 5 day/s , 3 month/s 5 day/s, 3 year/s ..) 
+	 * 
+	 * - getSameYearExpiry - Return a Map
+	 * with key as manufacturer and value as list of tablet names which are
+	 * manufactured in the current year and are already expired
+	 */
+
+<span class="fc" id="L41">	private static List&lt;Tablet&gt; tabletList = new ArrayList&lt;&gt;();</span>
+
+
+
+	static {
+
+<span class="fc" id="L47">		tabletList.add(new Tablet(&quot;Crocin&quot;, &quot;GSK&quot;, LocalDate.of(2020, 01, 12), LocalDate.of(2022, 01, 12)));</span>
+<span class="fc" id="L48">		tabletList.add(new Tablet(&quot;Calpol&quot;, &quot;GSK&quot;, LocalDate.of(2019, 01, 26), LocalDate.of(2024, 12, 31)));</span>
+<span class="fc" id="L49">		tabletList.add(new Tablet(&quot;Dolo&quot;, &quot;MicroLabs&quot;, LocalDate.of(2017, 03, 01), LocalDate.of(2021, 12, 31)));</span>
+<span class="fc" id="L50">		tabletList.add(new Tablet(&quot;Saridon&quot;, &quot;Piramal&quot;, LocalDate.of(2019, 12, 01), LocalDate.of(2022, 07, 01)));</span>
+<span class="fc" id="L51">		tabletList.add(new Tablet(&quot;Cetrizine&quot;, &quot;Dihal&quot;, LocalDate.of(2020, 04, 17), LocalDate.of(2022, 10, 01)));</span>
+<span class="fc" id="L52">		tabletList.add(new Tablet(&quot;Amoxycilin&quot;, &quot;Mylan&quot;, LocalDate.of(2020, 12, 01), LocalDate.of(2024, 8, 23)));</span>
+<span class="fc" id="L53">		tabletList.add(new Tablet(&quot;Medicine1&quot;, &quot;Manfctr1&quot;, LocalDate.of(2016, 10, 01), LocalDate.of(2018, 8, 23)));</span>
+<span class="fc" id="L54">		tabletList.add(new Tablet(&quot;Medicine2&quot;, &quot;Manfctr2&quot;, LocalDate.of(2014, 10, 01), LocalDate.of(2016, 8, 23)));</span>
+<span class="fc" id="L55">		tabletList.add(new Tablet(&quot;Medicine3&quot;, &quot;Manfctr3&quot;, LocalDate.of(2019, 01, 01), LocalDate.of(2019, 12, 23)));</span>
+<span class="fc" id="L56">		tabletList.add(new Tablet(&quot;Med_Exp1&quot;, &quot;Manfctr4&quot;, LocalDate.of(2020, 01, 01), LocalDate.of(2020, 01, 27)));</span>
+<span class="fc" id="L57">		tabletList.add(new Tablet(&quot;Med_Exp2&quot;, &quot;Manfctr5&quot;, LocalDate.of(2020, 01, 11), LocalDate.of(2020, 01, 26)));</span>
+<span class="fc" id="L58">	}</span>
+
+	public  List&lt;String&gt; getExpiringTables(int months){
+<span class="fc" id="L61">		return tabletList.stream()</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">				.filter(tablet -&gt; ChronoUnit.MONTHS.between(LocalDate.now(), tablet.getExpiryDate()) &lt; months) </span>
+<span class="fc" id="L63">				.map(Tablet :: getTabletName).collect(Collectors.toList());</span>
+
+	}
+
+
+	public  List&lt;Tablet&gt; getExpiringTabletsSorted(){
+
+<span class="fc" id="L70">		return tabletList.stream()</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">				.filter(tablet -&gt; ChronoUnit.DAYS.between(LocalDate.now(), tablet.getExpiryDate()) &lt; 0)</span>
+<span class="fc" id="L72">				.sorted(Comparator.comparing(Tablet :: getExpiryDate))</span>
+<span class="fc" id="L73">				.collect(Collectors.toList());</span>
+
+	}
+
+	public  Map&lt;String, String&gt; getTabletExpiryPeriod() {
+
+<span class="fc" id="L79">		return tabletList.stream()</span>
+<span class="fc" id="L80">				.collect(Collectors.toMap(Tablet :: getTabletName, </span>
+						(tablet -&gt; {
+<span class="fc" id="L82">							Period p =Period.between(tablet.getManufactureDate(), tablet.getExpiryDate());</span>
+<span class="fc" id="L83">							StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">							if(p.getYears()&gt;0) { sb.append(p.getYears()+&quot; year/s &quot;);}</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">							if(p.getMonths()&gt;0) { sb.append(p.getMonths()+&quot; month/s &quot;);}</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">							if(p.getDays()&gt;0) { sb.append(p.getDays()+&quot; day/s &quot;);}</span>
+<span class="fc" id="L87">							return sb.toString();})));</span>
+	}
+	
+	public  Map&lt;String,List&lt;String&gt;&gt; getSameYearExpiry() {
+<span class="fc" id="L91">		LocalDate today = LocalDate.now();</span>
+<span class="fc" id="L92">		int currentYear = today.getYear();</span>
+<span class="fc" id="L93">		return tabletList.stream()</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">				.filter(tablet -&gt; tablet.getManufactureDate().getYear() == currentYear &amp;&amp; </span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">						ChronoUnit.DAYS.between(today, tablet.getExpiryDate()) &lt; 0)</span>
+<span class="fc" id="L96">				.collect(Collectors.groupingBy(Tablet :: getManufacturer,</span>
+<span class="fc" id="L97">						Collectors.mapping(Tablet :: getTabletName, Collectors.toList())));</span>
+	}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

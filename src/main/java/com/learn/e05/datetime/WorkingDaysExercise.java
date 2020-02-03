@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class WorkingDaysExercise {
 	
-private WorkingDaysExercise () {}
 	
 	/*
 	 * getNextMonthsWorkingDays():List<String> - Method should return a List of
@@ -17,7 +16,7 @@ private WorkingDaysExercise () {}
 	 * should be in format dd-mm-yyyy
 	 */
 	
-	public static List<String> getNextMonthWorkingDays(LocalDate todayDate){
+	public List<String> getNextMonthWorkingDays(LocalDate todayDate){
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy]");
 		

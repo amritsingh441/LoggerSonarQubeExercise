@@ -23,9 +23,8 @@ public class BankDepositExercise {
 	 * The investment and maturity date can be in either of the formats <dd/mm/yyyy,
 	 * dd-mm-yyyy>. Test the above methods
 	 */
-	private BankDepositExercise() {}
-	public static String getMaturityDate(String investmentDate , Period duration) {
-
+	
+	public  String getMaturityDate(String investmentDate , Period duration) {
 
 		DateTimeFormatter dtFormatter1 = DateTimeFormatter.ofPattern("[dd-MM-yyyy][dd/MM/yyyy]");
 		LocalDate lDate = LocalDate.parse(investmentDate, dtFormatter1);
@@ -34,7 +33,7 @@ public class BankDepositExercise {
 		return maturityDate.format(dtFormatter2);
 	}
 
-	public static String getInvestmentPeriod(String investmentDate , String maturityDate) {
+	public  String getInvestmentPeriod(String investmentDate , String maturityDate) {
 
 
 		DateTimeFormatter dtFormatter1 = DateTimeFormatter.ofPattern("[dd-MM-yyyy][dd/MM/yyyy]");

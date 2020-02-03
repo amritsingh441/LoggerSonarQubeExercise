@@ -1,0 +1,13 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime.service,DateTimeExerciseService,0,25,0,0,0,6,0,5,0,5
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime.service,WorkingDaysExerciseService,0,13,0,0,0,3,0,2,0,2
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime.service,UtilityService,0,14,0,0,0,3,0,2,0,2
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime.service,BankDepositExerciseService,0,20,0,0,0,4,0,3,0,3
+Logger with SonarQube Exercise for Java 8,com.learn.e04.nio2.service,NIO2ExerciseService,26,0,0,0,5,0,4,0,4,0
+Logger with SonarQube Exercise for Java 8,com.learn.e04.nio2,NIO2Exercise,221,0,14,0,41,0,21,0,14,0
+Logger with SonarQube Exercise for Java 8,com.learn.e04.nio2,Tablet,70,0,0,0,19,0,10,0,10,0
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime,Tablet,43,27,0,0,9,10,5,5,5,5
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime,WorkingDaysExercise,0,46,0,4,0,8,0,6,0,4
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime,Utility,0,79,0,2,0,16,0,4,0,3
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime,DateTimeExercise,0,333,0,14,0,36,0,17,0,10
+Logger with SonarQube Exercise for Java 8,com.learn.e05.datetime,BankDepositExercise,0,67,0,0,0,13,0,3,0,3

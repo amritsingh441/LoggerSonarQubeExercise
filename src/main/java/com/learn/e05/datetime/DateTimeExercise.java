@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 public class DateTimeExercise {
 	
-private DateTimeExercise() {}
 
 	/*
 	 * Create a class Tablet with attributes,tablet name, manufacturer, manufacture
@@ -58,7 +57,7 @@ private DateTimeExercise() {}
 		tabletList.add(new Tablet("Med_Exp2", "Manfctr5", LocalDate.of(2020, 01, 11), LocalDate.of(2020, 01, 26)));
 	}
 
-	public static List<String> getExpiringTables(int months){
+	public  List<String> getExpiringTables(int months){
 		return tabletList.stream()
 				.filter(tablet -> ChronoUnit.MONTHS.between(LocalDate.now(), tablet.getExpiryDate()) < months) 
 				.map(Tablet :: getTabletName).collect(Collectors.toList());
@@ -66,7 +65,7 @@ private DateTimeExercise() {}
 	}
 
 
-	public static List<Tablet> getExpiringTabletsSorted(){
+	public  List<Tablet> getExpiringTabletsSorted(){
 
 		return tabletList.stream()
 				.filter(tablet -> ChronoUnit.DAYS.between(LocalDate.now(), tablet.getExpiryDate()) < 0)
@@ -75,7 +74,7 @@ private DateTimeExercise() {}
 
 	}
 
-	public static Map<String, String> getTabletExpiryPeriod() {
+	public  Map<String, String> getTabletExpiryPeriod() {
 
 		return tabletList.stream()
 				.collect(Collectors.toMap(Tablet :: getTabletName, 
@@ -88,7 +87,7 @@ private DateTimeExercise() {}
 							return sb.toString();})));
 	}
 	
-	public static Map<String,List<String>> getSameYearExpiry() {
+	public  Map<String,List<String>> getSameYearExpiry() {
 		LocalDate today = LocalDate.now();
 		int currentYear = today.getYear();
 		return tabletList.stream()

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankDepositExercise.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Logger with SonarQube Exercise for Java 8</a> &gt; <a href="index.source.html" class="el_package">com.learn.e05.datetime</a> &gt; <span class="el_source">BankDepositExercise.java</span></div><h1>BankDepositExercise.java</h1><pre class="source lang-java linenums">package com.learn.e05.datetime;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+
+
+<span class="fc" id="L9">public class BankDepositExercise {</span>
+	
+
+	/*
+	 * Define the below static methods:
+	 * 
+	 * - getMaturityDate(String investmentDate, Period duration): - Method should
+	 * take investment date and duration as input and return the maturity date as a
+	 * string in the format &lt;dd-mmm-yyyy&gt; 
+	 * 
+	 * - getInvestmentPeriod(String investmentDate, String maturityDate) - Method should take investment date and
+	 * maturity dates as input and return the duration as a string in the format &lt;x
+	 * years, y months&gt;
+	 * 
+	 * The investment and maturity date can be in either of the formats &lt;dd/mm/yyyy,
+	 * dd-mm-yyyy&gt;. Test the above methods
+	 */
+	
+	public  String getMaturityDate(String investmentDate , Period duration) {
+
+<span class="fc" id="L29">		DateTimeFormatter dtFormatter1 = DateTimeFormatter.ofPattern(&quot;[dd-MM-yyyy][dd/MM/yyyy]&quot;);</span>
+<span class="fc" id="L30">		LocalDate lDate = LocalDate.parse(investmentDate, dtFormatter1);</span>
+<span class="fc" id="L31">		DateTimeFormatter dtFormatter2 = DateTimeFormatter.ofPattern(&quot;[dd-MMM-yyyy]&quot;);</span>
+<span class="fc" id="L32">		LocalDate maturityDate = lDate.plusYears(duration.getYears()).plusMonths(duration.getMonths()).plusDays(duration.getDays());</span>
+<span class="fc" id="L33">		return maturityDate.format(dtFormatter2);</span>
+	}
+
+	public  String getInvestmentPeriod(String investmentDate , String maturityDate) {
+
+
+<span class="fc" id="L39">		DateTimeFormatter dtFormatter1 = DateTimeFormatter.ofPattern(&quot;[dd-MM-yyyy][dd/MM/yyyy]&quot;);</span>
+<span class="fc" id="L40">		LocalDate iDate = LocalDate.parse(investmentDate, dtFormatter1);</span>
+<span class="fc" id="L41">		LocalDate mDate = LocalDate.parse(maturityDate, dtFormatter1);</span>
+		
+<span class="fc" id="L43">		Period duration = Period.between(iDate, mDate);</span>
+<span class="fc" id="L44">		int years = duration.getYears();</span>
+<span class="fc" id="L45">		int months = duration.getMonths();</span>
+<span class="fc" id="L46">		return Integer.toString(years) +&quot; years, &quot;+Integer.toString(months)+&quot; months&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

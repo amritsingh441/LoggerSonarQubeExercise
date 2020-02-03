@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NIO2Exercise.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Logger with SonarQube Exercise for Java 8</a> &gt; <a href="index.source.html" class="el_package">com.learn.e04.nio2</a> &gt; <span class="el_source">NIO2Exercise.java</span></div><h1>NIO2Exercise.java</h1><pre class="source lang-java linenums">package com.learn.e04.nio2;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+<span class="nc" id="L21">public class NIO2Exercise {</span>
+	
+	
+<span class="nc" id="L24">	private static final Logger logger = LoggerFactory.getLogger(NIO2Exercise.class);</span>
+	private static final String FILE_PATH = &quot;src/data&quot;;
+	private static final String FILE_NAME = &quot;input.txt&quot;;
+	
+
+	public  Map&lt;String, String&gt; getExpiredTablets(String fileName, String manufacturer) {
+
+		//try(Stream&lt;String&gt; fileData = Files.lines(Paths.get(&quot;data&quot;,&quot;input.txt&quot;)))
+<span class="nc" id="L32">		try(Stream&lt;String&gt; fileData = Files.newBufferedReader(Paths.get(FILE_PATH,fileName)).lines())</span>
+		{
+<span class="nc" id="L34">			List&lt;String []&gt; records = fileData.map(input -&gt;input.split(&quot;,&quot;)).collect(Collectors.toList());</span>
+<span class="nc" id="L35">			Date date = new Date();</span>
+<span class="nc" id="L36">			SimpleDateFormat formatter = new  SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L37">			String todayDate = formatter.format(date);</span>
+<span class="nc" id="L38">			return records.stream()</span>
+<span class="nc bnc" id="L39" title="All 4 branches missed.">					.filter(str -&gt;str[1].equalsIgnoreCase(manufacturer) &amp;&amp; dateCompare(todayDate,str[3]))</span>
+<span class="nc" id="L40">					.collect(Collectors.toMap(str -&gt; str[0], str -&gt; str[3]));</span>
+			
+			
+<span class="nc" id="L43">		}catch(IOException ioe) {</span>
+<span class="nc" id="L44">			logger.debug(ioe.getMessage());</span>
+		}
+<span class="nc" id="L46">		return null;</span>
+
+	}
+	
+	public static void writeData(String data) {
+		
+<span class="nc" id="L52">		try(BufferedWriter br = Files.newBufferedWriter(Paths.get(FILE_PATH,FILE_NAME), StandardOpenOption.APPEND))</span>
+		{
+<span class="nc" id="L54">			br.newLine();</span>
+<span class="nc" id="L55">			br.write(data);</span>
+			
+<span class="nc" id="L57">		}catch(IOException ioe) {</span>
+<span class="nc" id="L58">			logger.debug(ioe.getMessage());</span>
+			
+<span class="nc" id="L60">		}</span>
+		
+<span class="nc" id="L62">	}</span>
+	
+	public  boolean dateCompare(String todayDate,String expiryDate) {
+		
+<span class="nc" id="L66">		SimpleDateFormat sdf = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+		try {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">			if(sdf.parse(todayDate).after(sdf.parse(expiryDate))) {</span>
+<span class="nc" id="L69">				return true;</span>
+			}
+<span class="nc" id="L71">		}catch(ParseException pe) {</span>
+<span class="nc" id="L72">			logger.debug(pe.getMessage());</span>
+<span class="nc" id="L73">		}</span>
+
+<span class="nc" id="L75">		return false;</span>
+	}
+
+	public static void getAllJavaFilesFromDirectory() {
+
+<span class="nc" id="L80">		try(Stream&lt;Path&gt; path = Files.walk(Paths.get(&quot;src&quot;)))</span>
+		{
+<span class="nc" id="L82">			path.filter(s -&gt; s.toString().endsWith(&quot;.java&quot;)).forEach(msg -&gt; logger.info(msg.toString()));</span>
+
+<span class="nc" id="L84">		}catch(IOException ioe) {</span>
+<span class="nc" id="L85">			logger.debug(ioe.getMessage());</span>
+<span class="nc" id="L86">		}</span>
+
+<span class="nc" id="L88">	}</span>
+
+	public boolean checkIfFileIsPresent(String fileName, String absolutePath) {
+
+<span class="nc" id="L92">		try(Stream&lt;Path&gt; path = Files.walk(Paths.get(&quot;src&quot;)))</span>
+		{
+<span class="nc bnc" id="L94" title="All 4 branches missed.">			Long totalCount = path.filter(s -&gt; s.toString().contains(fileName) &amp;&amp; s.toString().contains(absolutePath)).count();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">			if(totalCount&gt;0) {</span>
+<span class="nc" id="L96">				return true;</span>
+			}
+<span class="nc bnc" id="L98" title="All 2 branches missed.">		}catch(IOException ioe) {</span>
+<span class="nc" id="L99">			logger.debug(ioe.getMessage());</span>
+<span class="nc" id="L100">		}</span>
+
+<span class="nc" id="L102">		return false;</span>
+	}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

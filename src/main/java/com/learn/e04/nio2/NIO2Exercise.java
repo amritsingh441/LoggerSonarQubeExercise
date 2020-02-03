@@ -20,14 +20,13 @@ import org.slf4j.LoggerFactory;
 
 public class NIO2Exercise {
 	
-	private NIO2Exercise () {}
 	
 	private static final Logger logger = LoggerFactory.getLogger(NIO2Exercise.class);
 	private static final String FILE_PATH = "src/data";
 	private static final String FILE_NAME = "input.txt";
 	
 
-	public static Map<String, String> getExpiredTablets(String fileName, String manufacturer) {
+	public  Map<String, String> getExpiredTablets(String fileName, String manufacturer) {
 
 		//try(Stream<String> fileData = Files.lines(Paths.get("data","input.txt")))
 		try(Stream<String> fileData = Files.newBufferedReader(Paths.get(FILE_PATH,fileName)).lines())
@@ -62,7 +61,7 @@ public class NIO2Exercise {
 		
 	}
 	
-	public static boolean dateCompare(String todayDate,String expiryDate) {
+	public  boolean dateCompare(String todayDate,String expiryDate) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
@@ -88,7 +87,7 @@ public class NIO2Exercise {
 
 	}
 
-	public static boolean checkIfFileIsPresent(String fileName, String absolutePath) {
+	public boolean checkIfFileIsPresent(String fileName, String absolutePath) {
 
 		try(Stream<Path> path = Files.walk(Paths.get("src")))
 		{

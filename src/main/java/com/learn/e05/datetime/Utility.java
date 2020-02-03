@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 public class Utility {
 	
-	private Utility () {}
 	
 	private static final Logger logger = LoggerFactory.getLogger(Utility.class);
 	
@@ -22,7 +21,7 @@ public class Utility {
 	 * 24 hour format hh:mm
 	 */
 	
-	public static List<String>  getBusSchedule(String start, Duration frequency) {
+	public  List<String>  getBusSchedule(String start, Duration frequency) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[HH::mm]");
 		LocalTime startTime = LocalTime.parse(start);

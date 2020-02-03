@@ -1,0 +1,6 @@
+projectKey=com.learn:logger-sonarcube-exercises-boilerplate
+serverUrl=http://localhost:9000
+serverVersion=7.9.2.30863
+dashboardUrl=http://localhost:9000/dashboard?id=com.learn%3Alogger-sonarcube-exercises-boilerplate
+ceTaskId=AXALLD1auqZQZ8rj49rV
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXALLD1auqZQZ8rj49rV
