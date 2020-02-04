@@ -6,8 +6,12 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class WorkingDaysExercise {
 	
+	private static final Logger logger = LoggerFactory.getLogger(WorkingDaysExercise.class);
 	
 	/*
 	 * getNextMonthsWorkingDays():List<String> - Method should return a List of
@@ -17,7 +21,7 @@ public class WorkingDaysExercise {
 	 */
 	
 	public List<String> getNextMonthWorkingDays(LocalDate todayDate){
-		
+		logger.debug("Entering in getNextMonthWorkingDays method");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy]");
 		
 	LocalDate firstDayOfNextMonth = todayDate.with(TemporalAdjusters.firstDayOfNextMonth());

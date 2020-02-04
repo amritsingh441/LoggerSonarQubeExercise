@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class DateTimeExercise {
 	
@@ -39,7 +42,7 @@ public class DateTimeExercise {
 	 */
 
 	private static List<Tablet> tabletList = new ArrayList<>();
-
+	private static final Logger logger = LoggerFactory.getLogger(DateTimeExercise.class);
 
 
 	static {
@@ -58,6 +61,7 @@ public class DateTimeExercise {
 	}
 
 	public  List<String> getExpiringTables(int months){
+		logger.debug("Entering in getExpiringTables method");
 		return tabletList.stream()
 				.filter(tablet -> ChronoUnit.MONTHS.between(LocalDate.now(), tablet.getExpiryDate()) < months) 
 				.map(Tablet :: getTabletName).collect(Collectors.toList());
@@ -66,7 +70,7 @@ public class DateTimeExercise {
 
 
 	public  List<Tablet> getExpiringTabletsSorted(){
-
+		logger.debug("Entering in getExpiringTabletsSorted method");
 		return tabletList.stream()
 				.filter(tablet -> ChronoUnit.DAYS.between(LocalDate.now(), tablet.getExpiryDate()) < 0)
 				.sorted(Comparator.comparing(Tablet :: getExpiryDate))
@@ -75,7 +79,7 @@ public class DateTimeExercise {
 	}
 
 	public  Map<String, String> getTabletExpiryPeriod() {
-
+		logger.debug("Entering in getTabletExpiryPeriod method");
 		return tabletList.stream()
 				.collect(Collectors.toMap(Tablet :: getTabletName, 
 						(tablet -> {
@@ -88,6 +92,7 @@ public class DateTimeExercise {
 	}
 	
 	public  Map<String,List<String>> getSameYearExpiry() {
+		logger.debug("Entering in getSameYearExpiry method");
 		LocalDate today = LocalDate.now();
 		int currentYear = today.getYear();
 		return tabletList.stream()

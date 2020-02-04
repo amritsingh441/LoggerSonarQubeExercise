@@ -4,10 +4,15 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 
 public class BankDepositExercise {
 	
+	private static final Logger logger = LoggerFactory.getLogger(BankDepositExercise.class);
 
 	/*
 	 * Define the below static methods:
@@ -26,6 +31,7 @@ public class BankDepositExercise {
 	
 	public  String getMaturityDate(String investmentDate , Period duration) {
 
+		logger.debug("Entering in getMaturityDate method");
 		DateTimeFormatter dtFormatter1 = DateTimeFormatter.ofPattern("[dd-MM-yyyy][dd/MM/yyyy]");
 		LocalDate lDate = LocalDate.parse(investmentDate, dtFormatter1);
 		DateTimeFormatter dtFormatter2 = DateTimeFormatter.ofPattern("[dd-MMM-yyyy]");
@@ -35,7 +41,7 @@ public class BankDepositExercise {
 
 	public  String getInvestmentPeriod(String investmentDate , String maturityDate) {
 
-
+		logger.debug("Entering in getInvestmentPeriod method");
 		DateTimeFormatter dtFormatter1 = DateTimeFormatter.ofPattern("[dd-MM-yyyy][dd/MM/yyyy]");
 		LocalDate iDate = LocalDate.parse(investmentDate, dtFormatter1);
 		LocalDate mDate = LocalDate.parse(maturityDate, dtFormatter1);
